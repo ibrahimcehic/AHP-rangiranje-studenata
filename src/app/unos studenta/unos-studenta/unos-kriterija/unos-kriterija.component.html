@@ -1,56 +1,63 @@
-<div class="row p-2">
-    <div class="col-4">
-        <span>Godina studija</span>
-    </div>
-    <div class="col-2">
-        <p-inputNumber  [showButtons]="true" inputId="stacked" [min]="1" [max]="7"> </p-inputNumber>
-    </div>
+<form [formGroup]="studetForm">
+<div formGroupName="student">
+            <div class="row p-2">
+                <div class="col-6">
+                    <span>Godina studija</span>
+                </div>
+                <div class="col-2">
+                    <p-inputNumber formControlName="godina_studija" [showButtons]="true" inputId="stacked" [min]="1" [max]="7"> </p-inputNumber>
+                </div>
+            </div>
+            <div class="row p-2">
+                <div class="col-6">
+                    <span>Ciklus</span>
+                </div>
+                <div class="col-2">
+                    <p-inputNumber formControlName="ciklus" [showButtons]="true" inputId="stacked" [min]="1" [max]="2"> </p-inputNumber>
+                </div>
+            </div>
+            <div class="row p-2">
+                <div class="col-6">
+                    <span>Uspjeh u prethodnoj godini</span>
+                </div>
+                <div class="col-2">
+                    <p-inputNumber formControlName="uspjeh" mode="decimal" [minFractionDigits]="2" [showButtons]="true" inputId="minmax-buttons" [min]="1" [max]="10"> </p-inputNumber>
+                </div>
+            </div>
+            <div class="row p-2">
+                <div class="col-6">
+                    <span>Broj članova domaćinstva</span>
+                </div>
+                <div class="col-2">
+                    <p-inputNumber formControlName="broj_clanova" [showButtons]="true" inputId="stacked" [min]="0" [max]="20"> </p-inputNumber>
+                </div>
+            </div>
+       
+       
+            <div class="row p-2">
+                <div class="col-6">
+                    <span>Broj studenata iz domaćinstva</span>
+                </div>
+                <div class="col-2">
+                    <p-inputNumber formControlName="broj_studenata_iz_domacinstva" [showButtons]="true" inputId="stacked" [min]="0" [max]="20"> </p-inputNumber>
+                </div>
+            </div>
+            <div class="row p-2">
+                <div class="col-6">
+                    <span>Broj učenika u osnovnoj ili srednoj školi iz domaćinstva</span>
+                </div>
+                <div class="col-2">
+                    <p-inputNumber formControlName="broj_ucenika" [showButtons]="true" inputId="stacked" [min]="0" [max]="20"> </p-inputNumber>
+                </div>
+            </div>
+            <div class="row p-2">
+                <div class="col-6">
+                    <span>Mjesečni prihod domaćinstva</span>
+                </div>
+                <div class="col-2">
+                    <p-inputNumber formControlName="mjesecni_prihod" [showButtons]="true" inputId="stacked" [min]="0" mode="currency" currency = "BAM"> </p-inputNumber>
+                </div>
+            </div>
+       
 </div>
-<div class="row p-2">
-    <div class="col-4">
-        <span>Ciklus</span>
-    </div>
-    <div class="col-2">
-        <p-inputNumber  [showButtons]="true" inputId="stacked" [min]="1" [max]="2"> </p-inputNumber>
-    </div>
-</div>
-<div class="row p-2">
-    <div class="col-4">
-        <span>Uspjeh u prethodnoj godini</span>
-    </div>
-    <div class="col-2">
-        <p-inputNumber  mode="decimal" [minFractionDigits]="2" [showButtons]="true" inputId="minmax-buttons" [min]="1" [max]="10"> </p-inputNumber>
-    </div>
-</div>
-<div class="row p-2">
-    <div class="col-4">
-        <span>Broj članova domaćinstva</span>
-    </div>
-    <div class="col-2">
-        <p-inputNumber  [showButtons]="true" inputId="stacked" [min]="0" [max]="20"> </p-inputNumber>
-    </div>
-</div>
-<div class="row p-2">
-    <div class="col-4">
-        <span>Broj studenata iz domaćinstva</span>
-    </div>
-    <div class="col-2">
-        <p-inputNumber  [showButtons]="true" inputId="stacked" [min]="0" [max]="20"> </p-inputNumber>
-    </div>
-</div>
-<div class="row p-2">
-    <div class="col-4">
-        <span>Broj učenika u osnovnoj ili srednoj školi iz domaćinstva</span>
-    </div>
-    <div class="col-2">
-        <p-inputNumber  [showButtons]="true" inputId="stacked" [min]="0" [max]="20"> </p-inputNumber>
-    </div>
-</div>
-<div class="row p-2">
-    <div class="col-4">
-        <span>Mjesečni prihod domaćinstva</span>
-    </div>
-    <div class="col-2">
-        <p-inputNumber  [showButtons]="true" inputId="stacked" [min]="0" [max]="20"> </p-inputNumber>
-    </div>
-</div>
+</form>

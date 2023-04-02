@@ -1,88 +1,103 @@
-<div class="row p-2">
-    <div class="col-4">
-        <span>Ime</span>
-    </div>
-    <div class="col-2">
-        <input type="text" pInputText formControlName="text"/>
-    </div>
+<form [formGroup]="studetForm">
+    <div class="row" formGroupName="student" style="border: 1px solid black;">
+        <div class="col">
+            <div class="row p-2">
+                <div class="col-4">
+                    <span>Ime</span>
+                </div>
+                <div class="col-2">
+                    <input type="text" pInputText formControlName="ime"/>
+                </div>
+            </div>
+            <div class="row p-2">
+                <div class="col-4">
+                    <span>Prezime</span>
+                </div>
+                <div class="col-2">
+                    <input type="text" pInputText formControlName="prezime"/>
+                </div>
+            </div>
+            <div class="row p-2">
+                <div class="col-4">
+                    <span>Univerzitet</span>
+                </div>
+                <div class="col-2">
+                    <input type="text" pInputText formControlName="univerzitet"/>
+                </div>
+            </div>
+            <div class="row p-2">
+                <div class="col-4">
+                    <span>Fakultet</span>
+                </div>
+                <div class="col-2">
+                    <input type="text" pInputText formControlName="fakultet"/>
+                </div>
+            </div>
+            <div class="row p-2">
+                <div class="col-5">
+                    <span>Prijava koja se ne boduje</span>
+                </div>
+                <div class="col-2">
+                    <p-inputSwitch falseValue="false" formControlName="prijava_bez_bodovanja"></p-inputSwitch>
+                </div>
+            </div>
+            <div class="row p-2">
+                <div class="col-5">
+                    <span>Deficitarno zanimanje</span>
+                </div>
+                <div class="col-2">
+                    <p-inputSwitch formControlName="deficitarno_zanimanje"></p-inputSwitch>
+                </div>
+            </div>
+            <div class="row p-2">
+                <div class="col-5">
+                    <span>Invalidnost roditelja</span>
+                </div>
+                <div class="col-2">
+                    <p-inputSwitch formControlName="invalidnost_roditelja"></p-inputSwitch>
+                </div>
+            </div>
+            <div class="row p-2">
+                <div class="col-5">
+                    <span>Bolest članova porodice bez rješenja o invalidnosti</span>
+                </div>
+                <div class="col-2">
+                    <p-inputSwitch formControlName="bolest_clanova_bez_rjesenja"></p-inputSwitch>
+                </div>
+            </div>
+            <div class="row p-2">
+                <div class="col-5">
+                    <span>Student bez jednog roditelja</span>
+                </div>
+                <div class="col-2">
+                    <p-inputSwitch formControlName="student_bez_jednog_roditelja"></p-inputSwitch>
+                </div>
+            </div>
+            <div class="row p-2">
+                <div class="col-5">
+                    <span>Student neutvrđenog očinstva</span>
+                </div>
+                <div class="col-2">
+                    <p-inputSwitch formControlName="student_neutvrdenog_ocinstva"></p-inputSwitch>
+                </div>
+            </div>
+            <div class="row p-2">
+                <div class="col-5">
+                    <span>Student rastavljenih roditelja ili student samohranog roditelja</span>
+                </div>
+                <div class="col-2">
+                    <p-inputSwitch formControlName="rastavljeni_samohrani_roditelj"></p-inputSwitch>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <app-unos-kriterija [studetForm]="studetForm"></app-unos-kriterija>
+            <div class="text-start">
+               <p-button class="pe-4" styleClass="p-button-raised p-button-warning" (click)="resetForm()" label="Reset forme"></p-button> 
+                <p-button class="ps-5" (click)="unosStudenta()" [disabled]="!studetForm.valid" label="Unesite studenta"></p-button>
+            </div>
+            
+        </div>
+        
 </div>
-<div class="row p-2">
-    <div class="col-4">
-        <span>Prezime</span>
-    </div>
-    <div class="col-2">
-        <input type="text" pInputText formControlName="text"/>
-    </div>
-</div>
-<div class="row p-2">
-    <div class="col-4">
-        <span>Univerzitet</span>
-    </div>
-    <div class="col-2">
-        <input type="text" pInputText formControlName="text"/>
-    </div>
-</div>
-<div class="row p-2">
-    <div class="col-4">
-        <span>Fakultet</span>
-    </div>
-    <div class="col-2">
-        <input type="text" pInputText formControlName="text"/>
-    </div>
-</div>
-<div class="row p-2">
-    <div class="col-4">
-        <span>Prijava koja se ne boduje</span>
-    </div>
-    <div class="col-2">
-        <p-inputSwitch formControlName="checked"></p-inputSwitch>
-    </div>
-</div>
-<div class="row p-2">
-    <div class="col-4">
-        <span>Deficitarno zanimanje</span>
-    </div>
-    <div class="col-2">
-        <p-inputSwitch formControlName="checked"></p-inputSwitch>
-    </div>
-</div>
-<div class="row p-2">
-    <div class="col-4">
-        <span>Invalidnost roditelja</span>
-    </div>
-    <div class="col-2">
-        <p-inputSwitch formControlName="checked"></p-inputSwitch>
-    </div>
-</div>
-<div class="row p-2">
-    <div class="col-4">
-        <span>Bolest članova porodice bez rješenja o invalidnosti</span>
-    </div>
-    <div class="col-2">
-        <p-inputSwitch formControlName="checked"></p-inputSwitch>
-    </div>
-</div>
-<div class="row p-2">
-    <div class="col-4">
-        <span>Student bez jednog roditelja</span>
-    </div>
-    <div class="col-2">
-        <p-inputSwitch formControlName="checked"></p-inputSwitch>
-    </div>
-</div>
-<div class="row p-2">
-    <div class="col-4">
-        <span>Student neutvrđenog očinstva</span>
-    </div>
-    <div class="col-2">
-        <p-inputSwitch formControlName="checked"></p-inputSwitch>
-    </div>
-</div>
-<div class="row p-2">
-    <div class="col-4">
-        <span>Student rastavljenih roditelja ili student samohranog roditelja</span>
-    </div>
-    <div class="col-2">
-        <p-inputSwitch formControlName="checked"></p-inputSwitch>
-    </div>
-</div>
+</form>

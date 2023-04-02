@@ -5,13 +5,13 @@
           <div class="col">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                  <a class="nav-link " aria-current="page" href="#">Home</a>
+                  <a class="nav-link " aria-current="page" routerLink="home" href="#">Home</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Unos studenata</a>
+                  <a class="nav-link" href="#"  routerLink="unos-studenata">Unos studenata</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Definisanje ktriterija</a>
+                  <a class="nav-link" href="#"  routerLink="kriteriji">Definisanje kriterija</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#" tabindex="-1">Rang lista</a>
@@ -19,20 +19,12 @@
               </ul>
           </div>
         </div>
-        <div class="row">
-            <div class="col">
-              <app-home></app-home>
-            </div>
-          </div>
           <div class="row">
             <div class="col">
-                <app-unos-studenta></app-unos-studenta>
-            </div>
-            <div class="col">
-                <app-unos-kriterija></app-unos-kriterija>
-              </div>
+              <router-outlet></router-outlet>
+                <!-- <app-unos-studenta></app-unos-studenta>
+                <app-kriteriji-weight></app-kriteriji-weight> -->
           </div>
       </div>
   </div>
-<router-outlet></router-outlet>
-<p-button label="Submit"></p-button>
+

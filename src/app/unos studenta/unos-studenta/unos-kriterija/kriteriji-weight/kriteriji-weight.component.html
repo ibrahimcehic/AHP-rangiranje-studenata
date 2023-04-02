@@ -1,0 +1,104 @@
+<form [formGroup]="kriterijiWeightForm">
+<div class="row">
+    <div class="col">
+        <div class="row p-2">
+            <div class="col-4">
+                <span>Godina studija tezina</span>
+            </div>
+            <div class="col-2">
+                <p-inputNumber formControlName="godina_studija_weight" [showButtons]="true" inputId="stacked1" [min]="0" [max]="20"> </p-inputNumber>
+            </div>
+        </div>
+        <div class="row p-2">
+            <div class="col-4">
+                <span>Uspjeh u prethodnoj godini tezina</span>
+            </div>
+            <div class="col-2">
+                <p-inputNumber formControlName="uspjeh_weight" [showButtons]="true" inputId="stacked2" [min]="0" [max]="20"> </p-inputNumber>
+            </div>
+        </div>
+        <div class="row p-2">
+            <div class="col-4">
+                <span>Ciklus tezina</span>
+            </div>
+            <div class="col-2">
+                <p-inputNumber formControlName="ciklus_weight" [showButtons]="true" inputId="stacked3" [min]="0" [max]="20"> </p-inputNumber>
+            </div>
+        </div>
+        <div class="row p-2">
+            <div class="col-4">
+                <span>Broj članova domaćinstva tezina</span>
+            </div>
+            <div class="col-2">
+                <p-inputNumber formControlName="broj_clanova_weight" [showButtons]="true" inputId="stacked4" [min]="0" [max]="20"> </p-inputNumber>
+            </div>
+        </div>
+        <div class="row p-2">
+            <div class="col-4">
+                <span>Invalidnost roditelja tezina</span>
+            </div>
+            <div class="col-2">
+                <p-inputNumber formControlName="invalidnost_roditelja_weight" [showButtons]="true" inputId="stacked5" [min]="0" [max]="20"> </p-inputNumber>
+            </div>
+        </div>
+        <div class="row p-2">
+            <div class="col-4">
+                <span>Bolest članova porodice bez rješenja o invalidnosti tezina</span>
+            </div>
+            <div class="col-2">
+                <p-inputNumber formControlName="bolest_clanova_bez_rjesenja_weight" [showButtons]="true" inputId="stacked6" [min]="0" [max]="20"> </p-inputNumber>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="row p-2">
+            <div class="col-6">
+                <span>Student bez jednog roditelja tezina</span>
+            </div>
+            <div class="col-2">
+                <p-inputNumber formControlName="student_bez_jednog_roditelja_weight" [showButtons]="true" inputId="stacked7" [min]="0" [max]="20"> </p-inputNumber>
+            </div>
+        </div>
+        <div class="row p-2">
+            <div class="col-6">
+                <span>Student neutvrđenog očinstva tezina</span>
+            </div>
+            <div class="col-2">
+                <p-inputNumber formControlName="student_neutvrdenog_ocinstva_weight" [showButtons]="true" inputId="stacked8" [min]="0" [max]="20"> </p-inputNumber>
+            </div>
+        </div>
+        <div class="row p-2">
+            <div class="col-6">
+                <span>Student rastavljenih roditelja ili student samohranog roditelja tezina</span>
+            </div>
+            <div class="col-2">
+                <p-inputNumber formControlName="rastavljeni_samohrani_roditelj_weight" [showButtons]="true" inputId="stacked9" [min]="0" [max]="20"> </p-inputNumber>
+            </div>
+        </div>
+        <div class="row p-2">
+            <div class="col-6">
+                <span>Broj studenata iz domaćinstva tezina</span>
+            </div>
+            <div class="col-2">
+                <p-inputNumber formControlName="broj_studenata_iz_domacinstva_weight" [showButtons]="true" inputId="stacked10" [min]="0" [max]="20"> </p-inputNumber>
+            </div>
+        </div>
+        <div class="row p-2">
+            <div class="col-6">
+                <span>Broj učenika u osnovnoj ili srednoj školi iz domaćinstva tezina</span>
+            </div>
+            <div class="col-2">
+                <p-inputNumber formControlName="broj_ucenika_weight" [showButtons]="true" inputId="stacked11" [min]="0" [max]="20"> </p-inputNumber>
+            </div>
+        </div>
+        <div class="row p-2">
+            <div class="col-6">
+                <span>Mjesečni prihod domaćinstva tezina</span>
+            </div>
+            <div class="col-2">
+                <p-inputNumber formControlName="mjesecni_prihod_weight" [showButtons]="true" inputId="stacked12" [min]="0" [max]="20"> </p-inputNumber>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
