@@ -1,0 +1,47 @@
+
+<table>
+    <thead >
+        <tr>
+            <th></th>
+            <ng-container *ngFor="let kriterij of kriterijiArray">
+                <th class="ps-4 pt-4 pe-4">{{kriterij}}</th>
+            </ng-container>
+        </tr>
+    </thead> 
+    <tbody>
+        <tr *ngFor="let row of odnosMatrica; let i = index;">
+            <td> {{kriterijiArray[i]}}</td>
+                <td *ngFor="let cell of row; let j = index; trackBy: trackByFn" class="p-3">    
+                    <p-inputNumber [disabled]="disableCheck(i,j)" [min]="0" [max]="10" [allowEmpty]="false" styleClass="input-styling" name="name" inputId="integeronly" [(ngModel)]="odnosMatrica[i][j]" (onInput)="postaviReciprocnu(i,j)"> </p-inputNumber>
+                </td>    
+        </tr>
+        <tr>
+            <td><b>SUMA kolona</b></td>
+            <td *ngFor="let sum of sumaKolona; let j = index; trackBy: trackByFn" class="p-3">
+                <p-inputNumber [(ngModel)]="sumaKolona[j]" class="ng-invalid ng-dirty" [disabled]="true" styleClass="input-styling" name="name" inputId="integeronly" ></p-inputNumber>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<span> Normalizacija tabele, dijeljenje svih elemenata kolone sa sumom te kolone</span>
+<table>
+    <thead >
+        <tr>
+            <th></th>
+            <ng-container *ngFor="let kriterij of kriterijiArray">
+                <th class="ps-4 pt-4 pe-4">{{kriterij}}</th>
+            </ng-container>
+            <th>Prosječna vrijednost</th>
+        </tr>
+    </thead> 
+    <tbody>
+        <tr *ngFor="let row of normaliziranaMatrica; let i = index;">
+            <td> {{kriterijiArray[i]}}</td>
+                <td *ngFor="let cell of row; let j = index; trackBy: trackByFn" class="p-3">    
+                    <p-inputNumber [disabled]="true" styleClass="input-styling" name="name" inputId="integeronly" [(ngModel)]="normaliziranaMatrica[i][j]"> </p-inputNumber>
+                </td>  
+                <td><p-inputNumber [disabled]="true" class="ng-invalid ng-dirty" styleClass="input-styling" name="name" inputId="integeronly" [(ngModel)]="prosjecneVrijednosti[i]"> </p-inputNumber></td>  
+        </tr>
+    </tbody>
+</table>

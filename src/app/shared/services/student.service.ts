@@ -10,20 +10,20 @@ export class StudentService {
 
   constructor(public http: HttpClient) { }
   url: string = "  http://localhost:3000/students/"
-  url2: string = "  http://localhost:3000/employees"
-  getStudents(): Observable<Student>{
-    return this.http.get<Student>(this.url)
+  url2: string = "  http://localhost:3000/criteriaWeight"
+  getStudents(): Observable<Student[]>{
+    return this.http.get<Student[]>(this.url)
   }
   setStudent(st: Student): Observable<Student>{
     return this.http.post<Student>(this.url, st)
   }
-  getEmployes(): Observable<any>{
-    return this.http.get<any>(this.url2)
+  deleteStudent(id: number): Observable<Student>{
+    return this.http.delete<Student>(this.url + id)
   }
-  getEmployeById(id: number): Observable<any>{
-    return this.http.get<any>(this.url2+`/`+ id)
+  getCriteriaWeight(): Observable<any>{
+    return this.http.get<any>(this.url2 + '/1')
   }
-  postEmpolye(emp: any): Observable<any>{
-    return this.http.post<any>(this.url2, emp)
+  updateCriteriaWeight(lista: number[][]): Observable<number[][]>{
+    return this.http.put<number[][]>(this.url2 + '/1', lista);
   }
 }

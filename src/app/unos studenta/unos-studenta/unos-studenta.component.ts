@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MessageService } from 'primeng/api';
 import { Student } from 'src/app/shared/models/student';
 import { StudentService } from 'src/app/shared/services/student.service';
 
@@ -10,9 +11,8 @@ import { StudentService } from 'src/app/shared/services/student.service';
 })
 export class UnosStudentaComponent implements OnInit{
   noviStudent: Student | undefined;
-constructor( private fb: FormBuilder, private studentServis: StudentService){}
+constructor( private fb: FormBuilder, private studentServis: StudentService, private messageService: MessageService){}
   ngOnInit(): void {
-    this.studentServis.getEmployes().subscribe(res => console.log("Ispis responsa:", res))
     //this.studentServis.getEmployeById(1).subscribe(res => console.log("Ispis responsa by id pretraga:", res))
     //this.studentServis.postEmpolye({"name": "Lisa","salary": "2000"}).subscribe(res => console.log("Ispis responsa unos:", res));
     /* this.noviStudent = {
@@ -70,26 +70,35 @@ unosStudenta(){
     fakultet: this.fakultet?.value,
     prezime: this.prezime?.value,
     univerzitet: this.univerzitet?.value,
-    deficitarno_zanimanje: this.deficitarno_zanimanje?.value,
-    prijava_bez_bodovanja: this.prijava_bez_bodovanja?.value,
+    deficitarno_zanimanje: this.deficitarno_zanimanje?.value === null? true: false,
+    prijava_bez_bodovanja: this.prijava_bez_bodovanja?.value === null? true: false,
+    kriterij_jednake_vaznosti: 0,
+    kriterij_tezinska_vrijednost: 0,
     kriteriji: {
       godina_studija: this.godina_studija?.value,
       ciklus: this.ciklus?.value,
       uspjeh: this.uspjeh?.value,
       broj_clanova: this.broj_clanova?.value,
-      invalidnost_roditelja: this.invalidnost_roditelja?.value,
-      bolest_clanova_bez_rjesenja:  this.bolest_clanova_bez_rjesenja?.value,
-      student_bez_jednog_roditelja: this.student_bez_jednog_roditelja?.value,
-      student_neutvrdenog_ocinstva: this.student_neutvrdenog_ocinstva?.value,
-      rastavljeni_samohrani_roditelj: this.rastavljeni_samohrani_roditelj?.value,
+      invalidnost_roditelja: this.invalidnost_roditelja?.value === null? true: false,
+      bolest_clanova_bez_rjesenja:  this.bolest_clanova_bez_rjesenja?.value === null? true: false,
+      student_bez_jednog_roditelja: this.student_bez_jednog_roditelja?.value === null? true: false,
+      student_neutvrdenog_ocinstva: this.student_neutvrdenog_ocinstva?.value === null? true: false,
+      rastavljeni_samohrani_roditelj: this.rastavljeni_samohrani_roditelj?.value === null? true: false,
       broj_studenata_iz_domacinstva: this.broj_studenata_iz_domacinstva?.value,
       broj_ucenika: this.broj_ucenika?.value,
       mjesecni_prihod: this.mjesecni_prihod?.value
     }
   }
-  this.studentServis.setStudent(this.noviStudent).subscribe(res => console.log("unesen studdent:", res))
-  this.studetForm.reset();
+  this.studentServis.setStudent(this.noviStudent).subscribe({
+next: () =>{},
+error: () => {},
+complete: () => {
+  this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Student je uspješno dodan u listu studenata!' });
   console.log("Ispis studenta iz funkcije unosa:", this.noviStudent)
+}
+  })
+  this.studetForm.reset();
+  
 }
 
 resetForm(){

@@ -7,6 +7,8 @@ export interface Student{
     prijava_bez_bodovanja?: boolean;
     deficitarno_zanimanje?: boolean;
     kriteriji: KriterijiValue;
+    kriterij_jednake_vaznosti: number;
+    kriterij_tezinska_vrijednost: number;
 }
 export interface KriterijiValue{
     godina_studija: number;

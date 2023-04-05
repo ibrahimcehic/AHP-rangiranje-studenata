@@ -1,7 +1,7 @@
 
 <div class="container-fluid">
     <div class="container">
-        <div class="row">
+        <div class="row pb-4">
           <div class="col">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
@@ -11,10 +11,13 @@
                   <a class="nav-link" href="#"  routerLink="unos-studenata">Unos studenata</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#"  routerLink="kriteriji">Definisanje kriterija</a>
+                  <a class="nav-link" href="#"  routerLink="lista-studenata">Pregled studenata</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#" tabindex="-1">Rang lista</a>
+                  <a class="nav-link" href="#"  routerLink="criteria-weight">Definisanje kriterija</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#" tabindex="-1" routerLink="rang-lista">Rang lista</a>
                 </li>
               </ul>
           </div>
@@ -22,8 +25,6 @@
           <div class="row">
             <div class="col">
               <router-outlet></router-outlet>
-                <!-- <app-unos-studenta></app-unos-studenta>
-                <app-kriteriji-weight></app-kriteriji-weight> -->
           </div>
       </div>
   </div>

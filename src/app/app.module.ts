@@ -8,9 +8,17 @@ import { UnosStudentaComponent } from './unos studenta/unos-studenta/unos-studen
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { UnosKriterijaComponent } from './unos studenta/unos-studenta/unos-kriterija/unos-kriterija.component';
 import { InputNumberModule } from 'primeng/inputnumber';
-import { ReactiveFormsModule } from '@angular/forms';
-import { KriterijiWeightComponent } from './unos studenta/unos-studenta/unos-kriterija/kriteriji-weight/kriteriji-weight.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ListaStudenataComponent } from './lista-studenata/lista-studenata/lista-studenata.component';
+import { TableModule } from 'primeng/table';
+import { RangiranjeStudenataComponent } from './rangiranje-studenata/rangiranje-studenata/rangiranje-studenata.component';
+import { RangiranjeJednakeVaznostiComponent } from './rangiranje-studenata/rangiranje-jednake-vaznosti/rangiranje-jednake-vaznosti.component';
+import { TabViewModule } from 'primeng/tabview';
+import { RangiranjeTezinskiComponent } from './rangiranje-studenata/rangiranje-tezinski/rangiranje-tezinski.component';
 
 @NgModule({
   declarations: [
@@ -18,18 +26,27 @@ import { HttpClientModule } from '@angular/common/http';
     HomeComponent,
     UnosStudentaComponent,
     UnosKriterijaComponent,
-    KriterijiWeightComponent
+    ListaStudenataComponent,
+    RangiranjeStudenataComponent,
+    RangiranjeJednakeVaznostiComponent,
+    RangiranjeTezinskiComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     ButtonModule,
     InputSwitchModule,
     InputNumberModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ToastModule,
+    BrowserAnimationsModule,
+    TableModule,
+    TabViewModule
+
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
