@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { StudentService } from 'src/app/shared/services/student.service';
 import { MessageService } from 'primeng/api';
-import { Student } from 'src/app/shared/models/student';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Student, Student2 } from 'src/app/shared/models/student';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-rangiranje-tezinski',
@@ -10,7 +10,8 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
   styleUrls: ['./rangiranje-tezinski.component.css']
 })
 export class RangiranjeTezinskiComponent {
-  sviStudenti: Student[] = [];
+  studentiPom: Student[] = [];
+  sviStudenti: Student2[] = [];
   kriterijiArray: string[] = [];
   odnosMatrica: number[][] = [];
   sumaKolona: number[] = [];
@@ -30,16 +31,32 @@ export class RangiranjeTezinskiComponent {
   getAllStudents(){
     this.studentServis.getStudents().subscribe({
       next: (resp) => {
+        this.studentiPom = resp;
+      },
+      error: (e) =>{
+      },
+      complete: () =>{
+      }
+    }
+    )
+    this.studentServis.getStudents2().subscribe({
+      next: (resp) => {
         this.sviStudenti = resp;
-        console.log("ispis svih studenata:", this.sviStudenti);
+        
       },
       error: (e) =>{
 
       },
       complete: () =>{
+                this.sviStudenti.map(e =>{e.kriteriji.invalidnost_roditelja = Number(e.kriteriji.invalidnost_roditelja),
+                  e.kriteriji.bolest_clanova_bez_rjesenja = Number(e.kriteriji.bolest_clanova_bez_rjesenja),
+                  e.kriteriji.rastavljeni_samohrani_roditelj = Number(e.kriteriji.rastavljeni_samohrani_roditelj),
+                  e.kriteriji.student_bez_jednog_roditelja = Number(e.kriteriji.student_bez_jednog_roditelja)
+                  e.kriteriji.student_neutvrdenog_ocinstva = Number(e.kriteriji.student_neutvrdenog_ocinstva)
+              }) 
+              console.log("ispis svih studenata:", this.sviStudenti);
       }
     }
-      
     )
   }
 
@@ -121,4 +138,56 @@ export class RangiranjeTezinskiComponent {
       complete: () =>{}
     })
   }
+  mnozenjeElemenataSaProsjecnomVrijednoscu(){
+    for (let i = 0; i < this.sviStudenti.length; i++) {
+      this.sviStudenti[i].kriteriji.godina_studija = this.sviStudenti[i].kriteriji.godina_studija * this.prosjecneVrijednosti[0];
+      this.sviStudenti[i].kriteriji.uspjeh = this.sviStudenti[i].kriteriji.uspjeh * this.prosjecneVrijednosti[1];
+      this.sviStudenti[i].kriteriji.broj_clanova = this.sviStudenti[i].kriteriji.broj_clanova * this.prosjecneVrijednosti[2];
+      this.sviStudenti[i].kriteriji.invalidnost_roditelja = Number(this.sviStudenti[i].kriteriji.invalidnost_roditelja) * this.prosjecneVrijednosti[3]; 
+      this.sviStudenti[i].kriteriji.bolest_clanova_bez_rjesenja = Number(this.sviStudenti[i].kriteriji.bolest_clanova_bez_rjesenja) * this.prosjecneVrijednosti[4];
+      this.sviStudenti[i].kriteriji.student_bez_jednog_roditelja = Number(this.sviStudenti[i].kriteriji.student_bez_jednog_roditelja) * this.prosjecneVrijednosti[5];
+      this.sviStudenti[i].kriteriji.student_neutvrdenog_ocinstva = Number(this.sviStudenti[i].kriteriji.student_neutvrdenog_ocinstva) * this.prosjecneVrijednosti[6];
+      this.sviStudenti[i].kriteriji.rastavljeni_samohrani_roditelj = Number(this.sviStudenti[i].kriteriji.rastavljeni_samohrani_roditelj) * this.prosjecneVrijednosti[7];
+      this.sviStudenti[i].kriteriji.broj_studenata_iz_domacinstva = this.sviStudenti[i].kriteriji.broj_studenata_iz_domacinstva * this.prosjecneVrijednosti[8];
+      this.sviStudenti[i].kriteriji.broj_ucenika = this.sviStudenti[i].kriteriji.broj_ucenika * this.prosjecneVrijednosti[9];
+      this.sviStudenti[i].kriteriji.mjesecni_prihod = this.sviStudenti[i].kriteriji.mjesecni_prihod * this.prosjecneVrijednosti[10];
+      this.sviStudenti[i].kriteriji.ciklus = this.sviStudenti[i].kriteriji.ciklus * this.prosjecneVrijednosti[11];
+    }
+    this.vrijednostAlternativa()
+    console.log("ispis svih studenata sa pomnozenim elemntima prosjecne vrijednosti: ", this.sviStudenti)
+  }
+  vrijednostAlternativa(){
+    //izracun sume redova za svaku od alternativa
+    for(let i =0; i< this.sviStudenti.length; i++)
+    {
+      this.sviStudenti[i].kriterij_tezinska_vrijednost = 
+      this.sviStudenti[i].kriteriji.godina_studija+
+      this.sviStudenti[i].kriteriji.uspjeh +
+      this.sviStudenti[i].kriteriji.broj_clanova +
+      this.sviStudenti[i].kriteriji.invalidnost_roditelja +
+      this.sviStudenti[i].kriteriji.bolest_clanova_bez_rjesenja + 
+      this.sviStudenti[i].kriteriji.student_bez_jednog_roditelja  +
+      this.sviStudenti[i].kriteriji.student_neutvrdenog_ocinstva +
+      this.sviStudenti[i].kriteriji.rastavljeni_samohrani_roditelj +
+      this.sviStudenti[i].kriteriji.broj_studenata_iz_domacinstva +
+      this.sviStudenti[i].kriteriji.broj_ucenika +
+      this.sviStudenti[i].kriteriji.mjesecni_prihod + 
+      this.sviStudenti[i].kriteriji.ciklus;
+    }
+    this.updateStudetBaza()
+  }
+  
+  updateStudetBaza(){
+    for(let i = 0; i< this.sviStudenti.length; i++){
+      this.studentiPom[i].kriterij_tezinska_vrijednost = this.sviStudenti[i].kriterij_tezinska_vrijednost;
+    }
+    console.log("Poziva se funkcija update Baze")
+     for(let i = 0; i< this.studentiPom.length; i++){
+      this.studentServis.updateStudent(this.studentiPom[i], this.studentiPom[i].id ).subscribe({
+        next: () => {},
+        error: () => {},
+        complete: () => {}
+        })
+      }
+   } 
 }

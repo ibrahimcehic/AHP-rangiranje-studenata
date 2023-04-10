@@ -94,5 +94,16 @@ constructor(private studentServis: StudentService, private messageService: Messa
    Number(this.normalizacijaKriterija[i].kriteriji.student_neutvrdenog_ocinstva))
   }
   this.sviStudenti.sort((a,b) => (a.kriterij_jednake_vaznosti > b.kriterij_jednake_vaznosti) ? -1:1)
+  this.updateStudetBaza();
  }
+ updateStudetBaza(){
+  console.log("Poziva se funkcija update Baze")
+   for(let i = 0; i< this.sviStudenti.length; i++){
+    this.studentServis.updateStudent(this.sviStudenti[i], this.sviStudenti[i].id ).subscribe({
+      next: () => {},
+      error: () => {},
+      complete: () => {}
+      })
+    }
+ } 
 }

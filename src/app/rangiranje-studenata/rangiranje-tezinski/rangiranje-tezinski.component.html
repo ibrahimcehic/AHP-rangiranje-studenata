@@ -1,47 +1,116 @@
 
-<table>
-    <thead >
-        <tr>
-            <th></th>
-            <ng-container *ngFor="let kriterij of kriterijiArray">
-                <th class="ps-4 pt-4 pe-4">{{kriterij}}</th>
-            </ng-container>
-        </tr>
-    </thead> 
-    <tbody>
-        <tr *ngFor="let row of odnosMatrica; let i = index;">
-            <td> {{kriterijiArray[i]}}</td>
-                <td *ngFor="let cell of row; let j = index; trackBy: trackByFn" class="p-3">    
-                    <p-inputNumber [disabled]="disableCheck(i,j)" [min]="0" [max]="10" [allowEmpty]="false" styleClass="input-styling" name="name" inputId="integeronly" [(ngModel)]="odnosMatrica[i][j]" (onInput)="postaviReciprocnu(i,j)"> </p-inputNumber>
-                </td>    
-        </tr>
-        <tr>
-            <td><b>SUMA kolona</b></td>
-            <td *ngFor="let sum of sumaKolona; let j = index; trackBy: trackByFn" class="p-3">
-                <p-inputNumber [(ngModel)]="sumaKolona[j]" class="ng-invalid ng-dirty" [disabled]="true" styleClass="input-styling" name="name" inputId="integeronly" ></p-inputNumber>
-            </td>
-        </tr>
-    </tbody>
-</table>
+<p-fieldset legend="Saatyeve ljestvice formira se tablica (matrica) uporedbi kriterija" >
+    <div class="d-flex justify-content-center">
+        <table>
+            <thead >
+                <tr>
+                    <th></th>
+                    <ng-container *ngFor="let kriterij of kriterijiArray">
+                        <th class="ps-4 pt-4 pe-4">{{kriterij}}</th>
+                    </ng-container>
+                </tr>
+            </thead> 
+            <tbody>
+                <tr *ngFor="let row of odnosMatrica; let i = index;">
+                    <td> {{kriterijiArray[i]}}</td>
+                        <td *ngFor="let cell of row; let j = index; trackBy: trackByFn" class="p-3">    
+                            <p-inputNumber [disabled]="disableCheck(i,j)" [min]="0" [max]="10" [allowEmpty]="false" styleClass="input-styling" name="name" inputId="integeronly" [(ngModel)]="odnosMatrica[i][j]" (onInput)="postaviReciprocnu(i,j)"> </p-inputNumber>
+                        </td>    
+                </tr>
+                <tr>
+                    <td><b>SUMA kolona</b></td>
+                    <td *ngFor="let sum of sumaKolona; let j = index; trackBy: trackByFn" class="p-3">
+                        <p-inputNumber [(ngModel)]="sumaKolona[j]" class="ng-invalid ng-dirty" [disabled]="true" styleClass="input-styling" name="name" inputId="integeronly" ></p-inputNumber>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</p-fieldset>
 
-<span> Normalizacija tabele, dijeljenje svih elemenata kolone sa sumom te kolone</span>
-<table>
-    <thead >
-        <tr>
-            <th></th>
-            <ng-container *ngFor="let kriterij of kriterijiArray">
-                <th class="ps-4 pt-4 pe-4">{{kriterij}}</th>
-            </ng-container>
-            <th>Prosječna vrijednost</th>
-        </tr>
-    </thead> 
-    <tbody>
-        <tr *ngFor="let row of normaliziranaMatrica; let i = index;">
-            <td> {{kriterijiArray[i]}}</td>
-                <td *ngFor="let cell of row; let j = index; trackBy: trackByFn" class="p-3">    
-                    <p-inputNumber [disabled]="true" styleClass="input-styling" name="name" inputId="integeronly" [(ngModel)]="normaliziranaMatrica[i][j]"> </p-inputNumber>
-                </td>  
-                <td><p-inputNumber [disabled]="true" class="ng-invalid ng-dirty" styleClass="input-styling" name="name" inputId="integeronly" [(ngModel)]="prosjecneVrijednosti[i]"> </p-inputNumber></td>  
-        </tr>
-    </tbody>
-</table>
+<p-fieldset legend="Normalizacija tabele, dijeljenje svih elemenata kolone sa sumom te kolone">
+    <div class="d-flex justify-content-center">
+    <table>
+        <thead >
+            <tr>
+                <th></th>
+                <ng-container *ngFor="let kriterij of kriterijiArray">
+                    <th class="ps-4 pt-4 pe-4">{{kriterij}}</th>
+                </ng-container>
+                <th>Prosječna vrijednost</th>
+            </tr>
+        </thead> 
+        <tbody>
+            <tr *ngFor="let row of normaliziranaMatrica; let i = index;">
+                <td> {{kriterijiArray[i]}}</td>
+                    <td *ngFor="let cell of row; let j = index; trackBy: trackByFn" class="p-3">    
+                        <p-inputNumber [disabled]="true" styleClass="input-styling" name="name" inputId="integeronly" [(ngModel)]="normaliziranaMatrica[i][j]"> </p-inputNumber>
+                    </td>  
+                    <td><p-inputNumber [disabled]="true" class="ng-invalid ng-dirty" styleClass="input-styling" name="name" inputId="integeronly" [(ngModel)]="prosjecneVrijednosti[i]"> </p-inputNumber></td>  
+            </tr>
+        </tbody>
+    </table>
+</div>
+</p-fieldset>
+
+
+<p-fieldset legend="Težine (prioriteti) kriterijuma">
+    <p class="m-0">
+        Težine (prioriteti) kriterija izračunaju se kao prosječne vrijednosti elemenata redova normalizirane matrice.
+        Svaki od elemenata matrice množimo sa noramaliziranom prosječnom vrijednošću za određeni kriterij.
+    </p>
+
+    <div class="p-2">
+        <button pButton pRipple label="Izracunaj vrijednosti alternativa" class="p-button-success" (click) = "mnozenjeElemenataSaProsjecnomVrijednoscu()"></button>
+    </div>
+    
+    <p-table [value]="sviStudenti" [tableStyle]="{ 'min-width': '50rem' }">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>#</th>
+                <th>Ime</th>
+                <th>Prezime</th>
+                <th>Univerzitet</th>
+                <th>Fakultet</th>
+                <th>Godina studija <br> {{this.prosjecneVrijednosti[0] | number}}</th>
+                <th>Ciklus <br> {{this.prosjecneVrijednosti[11] | number}}</th>
+                <th>wu <br> {{this.prosjecneVrijednosti[1] | number}}</th>
+                <th>wbčd <br> {{this.prosjecneVrijednosti[2] | number}}</th>
+                <th>wir <br> {{this.prosjecneVrijednosti[3] | number}}</th>
+                <th>wbčbi <br> {{this.prosjecneVrijednosti[4] | number}}</th>
+                <th>wsbr <br> {{this.prosjecneVrijednosti[5] | number}}</th>
+                <th>wno <br> {{this.prosjecneVrijednosti[6] | number}}</th>
+                <th>wrsr <br> {{this.prosjecneVrijednosti[7] | number}}</th>
+                <th>wbsd <br> {{this.prosjecneVrijednosti[8] | number}}</th>
+                <th>wbu <br> {{this.prosjecneVrijednosti[9] | number}}</th>
+                <th>wppč <br> {{this.prosjecneVrijednosti[10] | number}}</th>
+                <th>Vrijednost alternativa</th>
+    
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-student let-rowIndex="rowIndex">
+            <tr class="row-vrijednost">
+                <td>{{rowIndex + 1}}</td>
+                <td>{{student.ime}}</td>
+                <td>{{student.prezime}}</td>
+                <td>{{student.univerzitet}}</td>
+                <td>{{student.fakultet}}</td>
+                <td>{{student.kriteriji.godina_studija.toFixed(2) }}</td>
+                <td>{{student.kriteriji.ciklus.toFixed(2)}}</td>
+                <td>{{student.kriteriji.uspjeh.toFixed(2)}}</td>
+                <td>{{student.kriteriji.broj_clanova.toFixed(2)}}</td>
+                <td>{{student.kriteriji.invalidnost_roditelja.toFixed(2)}}</td>
+                <td>{{student.kriteriji.bolest_clanova_bez_rjesenja.toFixed(2)}}</td>
+                <td>{{student.kriteriji.student_bez_jednog_roditelja.toFixed(2)}}</td>
+                <td>{{student.kriteriji.student_neutvrdenog_ocinstva.toFixed(2)}}</td>
+                <td>{{student.kriteriji.rastavljeni_samohrani_roditelj.toFixed(2)}}</td>
+                <td>{{student.kriteriji.broj_studenata_iz_domacinstva.toFixed(2)}}</td>
+                <td>{{student.kriteriji.broj_ucenika.toFixed(2)}}</td>
+                <td>{{student.kriteriji.mjesecni_prihod.toFixed(2)}}</td>  
+                <td>{{student.kriterij_tezinska_vrijednost.toFixed(2)}}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</p-fieldset>
+
+

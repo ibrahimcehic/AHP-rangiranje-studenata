@@ -19,6 +19,9 @@ import { RangiranjeStudenataComponent } from './rangiranje-studenata/rangiranje-
 import { RangiranjeJednakeVaznostiComponent } from './rangiranje-studenata/rangiranje-jednake-vaznosti/rangiranje-jednake-vaznosti.component';
 import { TabViewModule } from 'primeng/tabview';
 import { RangiranjeTezinskiComponent } from './rangiranje-studenata/rangiranje-tezinski/rangiranje-tezinski.component';
+import { FieldsetModule } from 'primeng/fieldset';
+import { PanelModule } from 'primeng/panel';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 @NgModule({
   declarations: [
@@ -43,7 +46,10 @@ import { RangiranjeTezinskiComponent } from './rangiranje-studenata/rangiranje-t
     ToastModule,
     BrowserAnimationsModule,
     TableModule,
-    TabViewModule
+    TabViewModule,
+    FieldsetModule,
+    PanelModule,
+    PdfViewerModule
 
   ],
   providers: [MessageService],

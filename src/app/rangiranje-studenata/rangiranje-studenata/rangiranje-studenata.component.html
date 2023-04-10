@@ -1,2 +1,44 @@
 <p>rangiranje-studenata works!</p>
-<app-rangiranje-jednake-vaznosti></app-rangiranje-jednake-vaznosti>
+
+<div class="card">
+    <p-tabView>
+        <p-tabPanel header="Rangiranje kriterijima jednake važnosti">
+            <div class="card">
+                <app-rangiranje-jednake-vaznosti></app-rangiranje-jednake-vaznosti>
+            </div>
+        </p-tabPanel>
+        <p-tabPanel header="Rangiranje kriterijima sa težinskim vrijdnosima">
+            <div class="card">
+                <p-table [value]="sviStudenti" [tableStyle]="{ 'min-width': '50rem' }">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>#</th>
+                            <th>Ime</th>
+                            <th>Prezime</th>
+                            <th>Univerzitet</th>
+                            <th>Fakultet</th>
+                            <th>Godina studija</th>
+                            <th>Ciklus</th>
+                            <th> Vrijednost alternativa težinski </th>
+                            
+
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-student let-rowIndex="rowIndex">
+                        <tr>
+                            <td>{{rowIndex + 1}}</td>
+                            <td>{{student.ime}}</td>
+                            <td>{{student.prezime}}</td>
+                            <td>{{student.univerzitet}}</td>
+                            <td>{{student.fakultet}}</td>
+                            <td>{{student.kriteriji.godina_studija }}</td>
+                            <td>{{student.kriteriji.ciklus}}</td>
+                            <td>{{student.kriterij_tezinska_vrijednost.toFixed(2)}}</td>    
+                            
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </p-tabPanel>
+    </p-tabView>
+</div>
